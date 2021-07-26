@@ -1,0 +1,38 @@
+
+body {
+  min-height: 100vh;
+  font-family: "Denk One", sans-serif !important;
+  position: relative;
+}
+
+#form_City {
+  border: none;
+  height: 100%;
+  width: 100%;
+  background-color: transparent !important;
+  padding-left: 2em;
+  outline: none;
+}
+
+#form div{
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .weather_card_left {
+    margin-right: 1em;
+  }
+  
+  .weather_card_left {
+    margin-right: 1em;
+  }
+
+  #weather_history {
+    max-width: 500px; 
+  }
+
+  #weather_forecast {
+    max-width: 500px; 
+  }
+}

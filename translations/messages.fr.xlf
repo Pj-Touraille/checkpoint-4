@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="DiImtSN" resname="Welcome">
+        <source>Welcome</source>
+        <target>Bienvenue</target>
+      </trans-unit>
+      <trans-unit id="OIC27Zk" resname="Today's weather in">
+        <source>Today's weather in</source>
+        <target>Météo actuelle à</target>
+      </trans-unit>
+      <trans-unit id="EMJ0hs2" resname="Sky condition">
+        <source>Sky condition</source>
+        <target>Ciel</target>
+      </trans-unit>
+      <trans-unit id="JdZg5Ho" resname="Get your weather instantly for anyplace in the world">
+        <source>Get your weather instantly for anyplace in the world</source>
+        <target>La météo partout dans le monde</target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>Trouver</target>
+      </trans-unit>
+      <trans-unit id=".DP3Mkb" resname="City">
+        <source>City</source>
+        <target>Ville</target>
+      </trans-unit>
+      <trans-unit id="uVjOi4c" resname="Temperature">
+        <source>Temperature</source>
+        <target>Température</target>
+      </trans-unit>
+      <trans-unit id="H4QH_e6" resname="Pressure">
+        <source>Pressure</source>
+        <target>Pression atm.</target>
+      </trans-unit>
+      <trans-unit id="xyE3xK8" resname="Feels like">
+        <source>Feels like</source>
+        <target>Ressenti</target>
+      </trans-unit>
+      <trans-unit id="RoGcy15" resname="Humidity">
+        <source>Humidity</source>
+        <target>Humidité</target>
+      </trans-unit>
+      <trans-unit id="J129qd7" resname="Sunset">
+        <source>Sunset</source>
+        <target>Aurore</target>
+      </trans-unit>
+      <trans-unit id="5FNHsBn" resname="Clouds">
+        <source>Clouds</source>
+        <target>Nuages</target>
+      </trans-unit>
+      <trans-unit id="nHxT6Ap" resname="Sunrise">
+        <source>Sunrise</source>
+        <target>Aube</target>
+      </trans-unit>
+      <trans-unit id="50wVjth" resname="Wind speed">
+        <source>Wind speed</source>
+        <target>Vent</target>
+      </trans-unit>
+      <trans-unit id="2q8EFEK" resname="Last updated at">
+        <source>Last updated at</source>
+        <target>Dernier relevé à</target>
+      </trans-unit>
+      <trans-unit id="DnaWAJM" resname="History">
+        <source>History</source>
+        <target>Archive</target>
+      </trans-unit>
+      <trans-unit id="dSBd6LN" resname="Forecast">
+        <source>Forecast</source>
+        <target>Précision</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

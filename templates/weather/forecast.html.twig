@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Actual weather
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<section>
+			<div class="row text-center my-5">
+				<h1>
+					{{ 'Welcome'|trans }}
+				</h1>
+			</div>
+
+			<div class="row">
+				<h2>
+					{{ 'Today\'s weather in '|trans }}
+					{{ meteo.name }}
+				</h2>
+
+				<span class="disabled">
+					lon: {{ meteo.coord.lon }}
+					lat : {{ meteo.coord.lat }}
+				</span>
+			</div>
+
+			<div class="dropdown">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					{{ app.request.locale|locale_name(app.request.locale)|u.title }}
+				</button>
+
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li><a class="dropdown-item" href="{{ path('weather_index', {_locale: 'fr'}) }}">Français</a></li>
+					<li><a class="dropdown-item" href="{{ path('weather_index', {_locale: 'en'}) }}">English</a></li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="row mx-3">
+			<div class="col-md-6">
+				<div class="d-flex justify-content-start align-items-center ms-3" style="height: 75px;">
+					{% for key, weather in meteo.weather %}
+						<img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="icon météo" style="width: 75px;">
+
+						<div class="row">
+							{{ 'Sky condition'|trans }}
+							:
+							{{ weather.description }}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="d-flex justify-content-end align-items-center ms-3"  style="height: 75px;">
+					<button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Afficher plus d'informations</button>
+				</div>
+
+				<ul class="list-group">
+					{# {% for key, value in meteo.données %}
+						<li id="collapseExample" class="list-group-item collapse">
+							{{ key|replace({'_': ' '}) }}
+							:
+							{{ value }}
+						</li>
+					{% endfor %} #}
+				</ul>
+			</div>
+		</section>
+
+		<div class="row mt-5">
+			{{ form_start(form, {'attr': {'class': '', 'data-text': 'Modification en cours'}}) }}
+				<div class="row">
+					{{ form_errors(form) }}
+				</div>
+
+				<div class="row">
+					{{ form_widget(form) }}
+				</div>
+
+				<button type="submit" class="btn btn-outline-success">
+					Search
+				</button>
+			{{ form_end(form) }}
+		</div>
+	</div>
+
+{% endblock %}

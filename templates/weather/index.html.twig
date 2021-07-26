@@ -1,0 +1,193 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Actual weather
+{% endblock %}
+
+{% block body %}
+	<section id="weather_header" class="row bg-primary shadow m-0 position-relative justify-content-between" style="height: 100px;">
+		<div class="col-4 text-center d-flex align-items-center">
+			<h1 class="display-3 d-none d-md-block d-md-none">SunIsUp</h1>
+			<h1 class="display-4 d-md-none">SunIsUp</h1>
+		</div>
+
+		<div class="col-6 text-center d-md-flex align-items-center d-none">
+			<h2>
+				{{ 'Get your weather instantly for anyplace in the world'|trans }}
+			</h2>
+		</div>
+
+		<div class="col-2 d-flex justify-content-end">
+			<div class="dropdown d-flex align-items-center pe-3">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					{{ app.request.locale|locale_name(app.request.locale)|u.title }}
+				</button>
+
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li><a class="dropdown-item" href="{{ path('weather_index', {_locale: 'fr'}) }}">Français</a></li>
+					<li><a class="dropdown-item" href="{{ path('weather_index', {_locale: 'en'}) }}">English</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div class="container-fluid bg-white text-dark">
+		<section id="weather_search" class="row m-0 justify-content-center">
+			{{ form_start(form, {'attr': {
+				'class': 'row col my-5 mx-md-5 mx-0 border-radius shadow p-0 bg-light justify-content-end',
+				'data-text': 'Recherche en cours',
+				'style': 'height: 50px;'
+			}}) }}
+				<div class="col-12 d-flex justify-content-end align-items-center p-0">
+					{{ form_widget(form, {'attr': {
+						'class': 'h-100 w-100',
+					}}) }}
+				</div>
+
+				<button type="submit" class="position-absolute col-auto pe-3 text-center h-100 d-flex align-items-center justify-content-end justify-content-md-center btn btn-light">
+					<h2 class="m-0 d-none d-md-block">{{ 'Search'|trans }}</h2>
+					<h5 class="m-0 d-md-none">{{ 'Search'|trans }}</h5>
+				</button>
+			{{ form_end(form) }}
+		</section>
+
+		<section id="weather_today" class="row m-0">
+			<div class="mx-md-5 mx-0 card w-100">
+				<div class="card-header row m-0 flex-md-row flex-column justify-content-center">
+					<h2 class="col-12 col-md-6 text-center mx-0 mb-3 my-md-auto d-none d-sm-block">{{ 'City'|trans }} : {{ data.name }} ({{ data.sys.country }})</h2>
+					{# <h2 class="col-12 col-md-6 text-center mx-0 mb-3 my-md-auto d-none d-sm-block">{{ 'Today\'s weather in'|trans }} : Toulouse (FR)</h2> #}
+					<h5 class="col-12 col-md-6 text-center mx-0 mb-3 my-md-auto d-sm-none">{{ 'City'|trans }} : {{ data.name }} ({{ data.sys.country }})</h5>
+					{# <h5 class="col-12 col-md-6 text-center mx-0 mb-3 my-md-auto d-sm-none">{{ 'Today\'s weather in'|trans }} : Toulouse ({FR)</h5> #}
+					<h5 class="col-12 col-md-6 text-center mx-0 my-md-auto d-none d-md-block">Lat : {{ weather.lat|round(2) }} - Lon : {{ weather.lon|round(2) }}</h5>
+					{# <h5 class="col-12 col-md-6 text-center mx-0 my-md-auto d-none d-md-block">Lat : 16.2 - Lon : 17.44</h5> #}
+
+					<div class="d-md-none d-flex justify-content-center">
+						<img src="http://openweathermap.org/img/wn/{{ weather.current.weather[0]['icon'] }}@2x.png"
+						{# <img src="" #}
+						alt="icon météo"
+						class=""
+						style="max-width: 150px;">
+					</div>
+				</div>
+
+				<div class="position-absolute h-100 w-100 d-md-flex flex-md-column flex-row justify-content-center align-items-center d-none" style="">
+					<h3 class="">{{ data.dt|date('d / m / Y') }}</h3>
+					{# <h3 class="">22 / 07 / 2021</h3> #}
+					<img src="http://openweathermap.org/img/wn/{{ weather.current.weather[0]['icon'] }}@2x.png"
+					{# <img src="" #}
+						alt="icon météo"
+						class=""
+						style="width: 150px;">
+					<h3 class="">{{ weather.current.weather[0]['description']|capitalize }}</h3>
+					{# <h3 class="">Clear sky</h3> #}
+				</div>
+
+				<div class="card-body row justify-content-center align-items-end text-center m-0" style="height: 400px;">
+					<div class="row col-12 flex-md-row flex-column">
+						<p class="col-12 col-md-6">{{ 'Temperature'|trans }} : {{ weather.current.temp }} °C</p>
+						{# <p class="col-12 col-md-6">{{ 'Temperature'|trans }} : 23 °C</p> #}
+						<p class="col-12 col-md-6">{{ 'Pressure'|trans }} : {{ weather.current.pressure }} hPa</p>
+						{# <p class="col-12 col-md-6">{{ 'Pressure'|trans }} : 1065 hPa</p> #}
+					</div>
+
+					<div class="row col-12 flex-md-row flex-column">
+						<p class="col-12 col-md-6">{{ 'Feels like'|trans }} : {{ weather.current.feels_like }} °C</p>
+						{# <p class="col-12 col-md-6">{{ 'Feels like'|trans }} : 22 °C</p> #}
+						<p class="col-12 col-md-6">{{ 'Humidity'|trans }} : {{ weather.current.humidity }} %</p>
+						{# <p class="col-12 col-md-6">{{ 'Humidity'|trans }} : 25 %</p> #}
+					</div>
+
+					<div class="row col-12 flex-md-row flex-column">
+						<p class="col-12 col-md-6">{{ 'Sunset'|trans }} : {{ weather.current.sunset|date('H:i') }}</p>
+						{# <p class="col-12 col-md-6">{{ 'Sunset'|trans }} : 22:05</p> #}
+						<p class="col-12 col-md-6">{{ 'Clouds'|trans }} : {{ weather.current.clouds }} %</p>
+						{# <p class="col-12 col-md-6">{{ 'Clouds'|trans }} : 5 %</p> #}
+					</div>
+
+					<div class="row col-12 flex-md-row flex-column">
+						<p class="col-12 col-md-6">{{ 'Sunrise'|trans }} : {{ weather.current.sunrise|date('H:i') }}</p>
+						{# <p class="col-12 col-md-6">{{ 'Sunrise'|trans }} : 06:45</p> #}
+						<p class="col-12 col-md-6">{{ 'Wind speed'|trans }} : {{ (weather.current.wind_speed * (3600 / 1000))|round }} km/h</p>
+						{# <p class="col-12 col-md-6">{{ 'Wind speed'|trans }} : 7.5 km/h</p> #}
+					</div>
+
+					<p class="col-12 text-center m-0 mt-3">{{ 'Last updated at'|trans }} {{ weather.current.dt|date('H:i') }}</p>
+					{# <p class="col-12 text-center m-0 mt-3">{{ 'Last updated at '|trans }} 17:02</p> #}
+				</div>
+			</div>
+		</section>
+
+		<div class="d-flex mx-md-5 mx-0 my-3 flex-column-reverse flex-md-row justify-content-center" id="weather_other">
+			<section id="weather_history" class="swiper-container col-md-6 mb-3" style="margin-right: 0;">
+				<div class="swiper-wrapper">
+					{% for day in historicalWeather|reverse %}
+					{# {% for i in 0..4 %} #}
+						<div class="swiper-slide">
+							<div class="weather_card_left card" style="min-height: 250px;">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h3>{{ 'History'|trans }} : {{ day[0]['current']['dt']|date('d / m / Y') }}</h3>
+									{# <h3>{{ 'History'|trans }} : 21 / 07 / 2021</h3> #}
+									<img src="http://openweathermap.org/img/wn/{{ day[0]['current']['weather'][0]['icon'] }}@2x.png" alt="icon météo" style="width: 75px;">
+									{# <img src="" alt="icon météo -" style="width: 75px;"> #}
+								</div>
+
+								<div class="card-body d-flex justify-content-center">
+									<div class="d-flex justify-content-end align-items-start flex-column">
+										<p>{{ 'Sky condition'|trans }} : {{ day[0]['current']['weather'][0]['description'] }}</p>
+										{# <p>{{ 'Sky condition'|trans }} : Clear sky</p> #}
+										<p>{{ 'Temperature'|trans }} : {{ day[0]['current']['temp'] }} °C</p>
+										{# <p>{{ 'Temperature'|trans }} : 22 °C</p> #}
+										<p>{{ 'Clouds'|trans }} : {{ day[0]['current']['clouds'] }} %</p>
+										{# <p>{{ 'Clouds'|trans }} : 5 %</p> #}
+										<p>{{ 'Wind speed'|trans }} : {{ (day[0]['current']['wind_speed'] * (3600 / 1000))|round }} km/h</p>
+										{# <p>{{ 'Wind speed'|trans }} : 7.2 km/h</p> #}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+
+				<div class="swiper-button-next mx-3"></div>
+    			<div class="swiper-button-prev"></div>
+			</section>
+
+			<section id="weather_forecast" class="swiper-container col-md-6 mb-3" style="margin-left: 0;">
+				<div class="swiper-wrapper">
+					{% for day in weather.daily|slice(1, weather.daily|length) %}
+					{# {% for i in 0..7 %} #}
+						<div class="swiper-slide">
+							<div class="card weather_card_right" style="min-height: 250px;">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h3>{{ 'Forecast'|trans }} : {{ day.dt|date('d / m / Y') }}</h3>
+									{# <h3>{{ 'Forecast'|trans }} : 23 / 07 / 2021</h3> #}
+									<img src="http://openweathermap.org/img/wn/{{ day.weather[0]['icon'] }}@2x.png" alt="icon météo" style="width: 75px;">
+									{# <img src="" alt="icon météo +" style="width: 75px;"> #}
+								</div>
+
+								<div class="card-body d-flex justify-content-center">
+									<div class="d-flex justify-content-end align-items-start flex-column">
+										<p>{{ 'Sky condition'|trans }} : {{ day.weather[0]['description'] }}</p>
+										{# <p>{{ 'Sky condition'|trans }} : Clear sky</p> #}
+										<p>{{ 'Temperature'|trans }} : {{ day.temp.day }} °C</p>
+										{# <p>{{ 'Temperature'|trans }} : 45 °C</p> #}
+										<p>{{ 'Clouds'|trans }} : {{ day.clouds }} %</p>
+										{# <p>{{ 'Clouds'|trans }} : 2 %</p> #}
+										<p>{{ 'Wind speed'|trans }} : {{ (day.wind_speed * (3600 / 1000))|round }} km/h</p>
+										{# <p>{{ 'Wind speed'|trans }} : 4.4 km/h</p> #}
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+
+				<div class="swiper-button-next"></div>
+    			<div class="swiper-button-prev"></div>
+			</section>
+		</div>
+
+
+	</div>
+
+{% endblock %}
