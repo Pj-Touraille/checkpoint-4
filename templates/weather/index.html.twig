@@ -52,7 +52,7 @@
 		</section>
 
 		<section id="weather_today" class="row m-0">
-			<div class="mx-md-5 mx-0 card w-100">
+			<div class="mx-md-5 mx-0 card w-100 shadow">
 				<div class="card-header row m-0 flex-md-row flex-column justify-content-center">
 					<h2 class="col-12 col-md-6 text-center mx-0 mb-3 my-md-auto d-none d-sm-block">{{ 'City'|trans }} : {{ data.name }} ({{ data.sys.country }})</h2>
 					{# <h2 class="col-12 col-md-6 text-center mx-0 mb-3 my-md-auto d-none d-sm-block">{{ 'Today\'s weather in'|trans }} : Toulouse (FR)</h2> #}
@@ -123,7 +123,7 @@
 					{% for day in historicalWeather|reverse %}
 					{# {% for i in 0..4 %} #}
 						<div class="swiper-slide">
-							<div class="weather_card_left card" style="min-height: 250px;">
+							<div class="weather_card_left card shadow" style="min-height: 250px;">
 								<div class="card-header d-flex justify-content-between align-items-center">
 									<h3>{{ 'History'|trans }} : {{ day[0]['current']['dt']|date('d / m / Y') }}</h3>
 									{# <h3>{{ 'History'|trans }} : 21 / 07 / 2021</h3> #}
@@ -157,7 +157,7 @@
 					{% for day in weather.daily|slice(1, weather.daily|length) %}
 					{# {% for i in 0..7 %} #}
 						<div class="swiper-slide">
-							<div class="card weather_card_right" style="min-height: 250px;">
+							<div class="card weather_card_right shadow" style="min-height: 250px;">
 								<div class="card-header d-flex justify-content-between align-items-center">
 									<h3>{{ 'Forecast'|trans }} : {{ day.dt|date('d / m / Y') }}</h3>
 									{# <h3>{{ 'Forecast'|trans }} : 23 / 07 / 2021</h3> #}

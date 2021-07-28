@@ -30,31 +30,25 @@ class WeatherController extends AbstractController
             ->getForm();
         $form->handleRequest($request);
 
-        
-        // Vérification de l'existence de la request en methode POST
-        // if ($request->isMethod('post')) {
         if ($form->isSubmitted() && $form->isValid()) {
-            // Validation simple des données
             if (empty($request->request->get('form')['City'])) {
                 $errors[] = 'Please fill out the text area';
             } else {
                 $city = ucfirst(strtolower(htmlspecialchars(trim($request->request->get('form')['City']))));
             }
         }
+
         try {
             $results = $weatherService->getWeather($city ?? 'Toulouse', $request->getLocale(), $this->getParameter('api_key'));
-            // $results = ['', '', '', ''];
         } catch (\Exception $e) {
             echo $e->getMessage();
-            $results = ['', '', '', ''];
         }
 
-
         return $this->render('weather/index.html.twig', [
-            'weather' => $results[0],
-            'data' => $results[1],
-            'historicalWeather' => $results[2],
-            'country' => $results[3],
+            'weather' => $results['forecast'] ?? [],
+            'data' => $results['actual'] ?? [],
+            'historicalWeather' => $results['history'] ?? [],
+            'country' => $results['country'] ?? [],
             'form' => $form->createView()
         ]);
     }

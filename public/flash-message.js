@@ -1,7 +1,3 @@
-import Swal from "sweetalert2";
-
-console.log('salut je suis là');
-
 // Configuration de base des messages flash
 const FlashSuccess = Swal.mixin({
     toast: true,
@@ -28,7 +24,7 @@ document.querySelectorAll('.notification').forEach((element) => {
 // chaque soumission de formulaire
 document.querySelectorAll('form:not(.form-signin)').forEach((element) => {
     element.addEventListener('submit', (event) => {
-        const text = event.target.dataset.text ?? 'Sauvegarde en cours ...';
+        const text = event.target.dataset.text ?? 'Recherche en cours ...';
 
         Swal.fire({
             allowOutsideClick: false,

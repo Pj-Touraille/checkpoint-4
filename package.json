@@ -1,0 +1,29 @@
+{
+  "name": "checkpoint-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "snowpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pj-Touraille/checkpoint-4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pj-Touraille/checkpoint-4/issues"
+  },
+  "homepage": "https://github.com/Pj-Touraille/checkpoint-4#readme",
+  "dependencies": {
+    "sweetalert2": "^11.0.20",
+    "swiper": "^6.8.0"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.3"
+  }
+}

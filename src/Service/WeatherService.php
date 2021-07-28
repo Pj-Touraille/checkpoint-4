@@ -62,7 +62,10 @@ class WeatherService
             echo $e->getMessage();
             exit;
         }
-        // dd($results, $coordinates, $historicalWeather);
-        return [$results, $coordinates, $historicalWeather, $country];
+        return [
+            'forecast' => $results,
+            'actual' => $coordinates,
+            'history' => $historicalWeather,
+            'country' => $country];
     }
 }
